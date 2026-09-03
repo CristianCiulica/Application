@@ -1,8 +1,11 @@
 package org.cristian.application;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @RestController
 public class TasksController {
     public List<Task> tasks=new ArrayList<Task>();
@@ -17,9 +20,17 @@ public class TasksController {
     public List<Task> getTasks(){
        return tasks;
     }
+
     @GetMapping("/api/tasks/{id}")
-    public Task getTask(@PathVariable int id){
-        return tasks.get(id);
+    public ResponseEntity<Task> getTask(@PathVariable int id){
+       var t = tasks.stream()
+               .filter(task -> task.getId()==id)
+               .findFirst();
+       if(t.isEmpty())
+           return ResponseEntity.notFound().build();
+       else
+           return ResponseEntity.ok(t.get());
+
     }
 
     @PostMapping("/api/tasks")
@@ -27,4 +38,15 @@ public class TasksController {
         tasks.add(t);
         return t;
     }
+
+    @DeleteMapping("/api/tasks/{id}")
+    public ResponseEntity<Task> deleteTask(@PathVariable int id){
+        if(tasks.removeIf(task -> task.getId()==id))
+            return ResponseEntity.noContent().build();
+        else
+            return ResponseEntity.notFound().build();
+
+
+    }
+
 }
