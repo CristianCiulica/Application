@@ -1,7 +1,1 @@
-POST http://localhost:8080/api/tasks
-Content-Type: application/json
-
-{
-  "id": 4,
-  "title": "Learn Spring"
-}
+GET http://localhost:8080/api/tasks/0
