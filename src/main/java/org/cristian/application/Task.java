@@ -3,7 +3,6 @@ package org.cristian.application;
 public class Task {
     public int id;
     public String title;
-
     public Task(int id, String title){this.id=id; this.title=title;}
 
     public String getTitle() {
