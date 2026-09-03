@@ -8,7 +8,6 @@ import java.util.List;
 public class TasksController {
     public List<Task> tasks=new ArrayList<Task>();
 
-    
     public TasksController() {
         tasks.add(new Task(1,"task1"));
         tasks.add(new Task(2,"task2"));
