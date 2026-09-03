@@ -32,7 +32,6 @@ public class TasksController {
            return ResponseEntity.ok(t.get());
 
     }
-
     @PostMapping("/api/tasks")
     public Task addTask(@RequestBody Task t) {
         tasks.add(t);
